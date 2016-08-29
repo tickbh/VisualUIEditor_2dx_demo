@@ -1,5 +1,5 @@
-#ifndef _VISUALUI_UTILS_UITUILS_H_
-#define _VISUALUI_UTILS_UITUILS_H_
+#ifndef _VISUALUI_UTILS_DATAUITUILS_H_
+#define _VISUALUI_UTILS_DATAUITUILS_H_
 
 
 #include "json/json.h"

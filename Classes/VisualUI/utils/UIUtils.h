@@ -2,6 +2,7 @@
 #define _VISUALUI_UTILS_UITUILS_H_
 
 #include "../ui/UILayer.h"
+#include "json/json.h"
 
 class UIUtils {
 public:
@@ -14,6 +15,9 @@ private:
 public:
 
 	static bool CheckPathRepeat(cocos2d::Node* node, std::string path);
-};
+	Json::Value& GetCurJsonData(std::string path);
+	cocos2d::Color3B CovertToColor(Json::Value& value, bool* isSuccess);
+
+	int CalcWidth(cocos2d::Node* node, std::string& width, cocos2d::Node* parent);
 
 #endif
