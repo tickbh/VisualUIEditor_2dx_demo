@@ -30,13 +30,13 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="UILayer.cpp">
+    <ClCompile Include="..\Classes\VisualUI\ui\UILayer.cpp">
       <Filter>VisualUI\ui</Filter>
     </ClCompile>
-    <ClCompile Include="UIDataUtils.cpp">
+    <ClCompile Include="..\Classes\VisualUI\utils\UIUtils.cpp">
       <Filter>VisualUI\utils</Filter>
     </ClCompile>
-    <ClCompile Include="UIUtils.cpp">
+    <ClCompile Include="..\Classes\VisualUI\utils\UIDataUtils.cpp">
       <Filter>VisualUI\utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,13 +50,13 @@
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="UILayer.h">
+    <ClInclude Include="..\Classes\VisualUI\ui\UILayer.h">
       <Filter>VisualUI\ui</Filter>
     </ClInclude>
-    <ClInclude Include="UIDataUtils.h">
+    <ClInclude Include="..\Classes\VisualUI\utils\UIUtils.h">
       <Filter>VisualUI\utils</Filter>
     </ClInclude>
-    <ClInclude Include="UIUtils.h">
+    <ClInclude Include="..\Classes\VisualUI\utils\UIDataUtils.h">
       <Filter>VisualUI\utils</Filter>
     </ClInclude>
   </ItemGroup>
