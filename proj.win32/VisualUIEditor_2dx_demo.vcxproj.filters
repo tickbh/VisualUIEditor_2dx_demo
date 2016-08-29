@@ -10,6 +10,15 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VisualUI">
+      <UniqueIdentifier>{bc287848-c971-4c0c-bf5c-f644b962e08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VisualUI\ui">
+      <UniqueIdentifier>{b3d4ae9a-ac0e-495b-a7f0-947a8c12f92f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VisualUI\utils">
+      <UniqueIdentifier>{533caadf-a88a-4bca-b720-cf6bc3e27256}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,6 +30,15 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="UILayer.cpp">
+      <Filter>VisualUI\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="UIDataUtils.cpp">
+      <Filter>VisualUI\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="UIUtils.cpp">
+      <Filter>VisualUI\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -31,6 +49,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="UILayer.h">
+      <Filter>VisualUI\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="UIDataUtils.h">
+      <Filter>VisualUI\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UIUtils.h">
+      <Filter>VisualUI\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
