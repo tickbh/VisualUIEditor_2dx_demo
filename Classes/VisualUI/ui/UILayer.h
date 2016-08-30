@@ -19,7 +19,7 @@ public:
 };
 typedef std::function<void(UIEvent&)> eventCallback;
 
-class UILayer : cocos2d::Layer {
+class UILayer : public cocos2d::Layer {
 public:
 	static UILayer* create(std::string data, cocos2d::Node* parent);
 

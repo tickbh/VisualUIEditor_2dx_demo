@@ -8,7 +8,7 @@ typedef std::function<void(cocos2d::ui::Widget::ccWidgetTouchCallback)> addEvent
 
 class UIUtils {
 public:
-	UIUtils* GetInstance();
+	static UIUtils* GetInstance();
 
 	std::function<UILayer*(std::string, cocos2d::Node*)>* GetPathTemple(std::string path);
 	void RegisterPathTemple(std::string path, std::function<UILayer*(std::string, cocos2d::Node*)> func);
@@ -24,7 +24,7 @@ public:
 	static int CalcWidth(cocos2d::Node* node, std::string& width, cocos2d::Node* parent);
 	static int CalcHeight(cocos2d::Node* node, std::string& height, cocos2d::Node* parent);
 
-	static cocos2d::Node* CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node* parent, UILayer* controlNode);
+	static cocos2d::Node* CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node* parent, bool isSetParent, UILayer* controlNode);
 
 	static cocos2d::SpriteFrame* GetSpriteFrameForName(std::string name);
 

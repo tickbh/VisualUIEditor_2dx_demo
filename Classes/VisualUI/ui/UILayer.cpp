@@ -1,9 +1,10 @@
 #include "UILayer.h"
 #include <functional>
+#include "../utils/UIUtils.h"
 
 UILayer::UILayer(std::string data, cocos2d::Node* parent)
 {
-
+	UIUtils::CocosGenBaseNodeByData(UIUtils::GetCurJsonData(data), this, true, this);
 }
 
 UILayer* UILayer::create(std::string data, cocos2d::Node* parent)

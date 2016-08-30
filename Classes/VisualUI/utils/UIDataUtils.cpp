@@ -9,12 +9,16 @@ UIDataUtils* UIDataUtils::GetInstance()
 
 Json::Value& UIDataUtils::GetJsonDataFromUI(std::string name, std::string fullpath /* = "" */)
 {
+	static Json::Value nullValue = Json::nullValue;
 	if (caches.find(name) != caches.end()) {
 		return caches[name];
 	}
+	if (fullpath.length() == 0) {
+		fullpath = name;
+	}
 	cocos2d::Data data = cocos2d::FileUtils::getInstance()->getDataFromFile(fullpath);
 	if (data.isNull()) {
-		return std::move(Json::Value(Json::nullValue));
+		return nullValue;
 	}
 
 	Json::Reader reader;
@@ -22,7 +26,7 @@ Json::Value& UIDataUtils::GetJsonDataFromUI(std::string name, std::string fullpa
 
 	if (!reader.parse((const char*)data.getBytes(), (const char*)(data.getBytes() + data.getSize()), root, false))
 	{
-		return std::move(Json::Value(Json::nullValue));
+		return nullValue;
 	}
 
 	caches[name] = std::move(root);

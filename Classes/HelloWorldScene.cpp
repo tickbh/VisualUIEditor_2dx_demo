@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "VisualUI/ui/UILayer.h"
 
 USING_NS_CC;
 
@@ -27,51 +28,54 @@ bool HelloWorld::init()
     {
         return false;
     }
-    
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
+	auto layer = UILayer::create("ui/test.ui", nullptr);
+	this->addChild(layer);
+    //
+    //auto visibleSize = Director::getInstance()->getVisibleSize();
+    //Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
-    
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
+    ///////////////////////////////
+    //// 2. add a menu item with "X" image, which is clicked to quit the program
+    ////    you may modify it.
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    //// add a "close" icon to exit the progress. it's an autorelease object
+    //auto closeItem = MenuItemImage::create(
+    //                                       "CloseNormal.png",
+    //                                       "CloseSelected.png",
+    //                                       CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+    //
+    //closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
+    //                            origin.y + closeItem->getContentSize().height/2));
 
-    /////////////////////////////
-    // 3. add your codes below...
+    //// create menu, it's an autorelease object
+    //auto menu = Menu::create(closeItem, NULL);
+    //menu->setPosition(Vec2::ZERO);
+    //this->addChild(menu, 1);
 
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
+    ///////////////////////////////
+    //// 3. add your codes below...
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
+    //// add a label shows "Hello World"
+    //// create and initialize a label
+    //
+    //auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+    //
+    //// position the label on the center of the screen
+    //label->setPosition(Vec2(origin.x + visibleSize.width/2,
+    //                        origin.y + visibleSize.height - label->getContentSize().height));
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
+    //// add the label as a child to this layer
+    //this->addChild(label, 1);
 
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    //// add "HelloWorld" splash screen"
+    //auto sprite = Sprite::create("HelloWorld.png");
 
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+    //// position the sprite on the center of the screen
+    //sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+
+    //// add the sprite as a child to this layer
+    //this->addChild(sprite, 0);
     
     return true;
 }

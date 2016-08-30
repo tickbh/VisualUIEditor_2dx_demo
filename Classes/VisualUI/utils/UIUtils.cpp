@@ -88,7 +88,7 @@ int UIUtils::CalcHeight(cocos2d::Node* node, std::string& height, cocos2d::Node*
 
 }
 
-cocos2d::Node* UIUtils::CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node* parent, UILayer* controlNode)
+cocos2d::Node* UIUtils::CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node* parent, bool isSetParent, UILayer* controlNode)
 {
 	if (data.isNull()) {
 		return nullptr;
@@ -97,15 +97,17 @@ cocos2d::Node* UIUtils::CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node*
 	auto type = data["type"].asString();
 	auto width = CalcWidth(node, data["width"].asString(), parent);
 	auto height = CalcHeight(node, data["height"].asString(), parent);
-	if (data["path"].isString()) {
+	if (isSetParent) {
+		node = parent;
+	} else if (data["path"].isString()) {
 		if (CheckPathRepeat(parent, data["path"].asString())) {
 			return nullptr;
 		}
-		auto& temple = *UIUtils::GetInstance()->GetPathTemple(data["path"].asString());
+		auto temple = UIUtils::GetInstance()->GetPathTemple(data["path"].asString());
 		if (temple) {
-			node = (cocos2d::Node*)temple(data["path"].asString(), parent);
+			node = (*temple)(data["path"].asString(), parent);
 		} else {
-			node = (cocos2d::Node*)UILayer::create(data["path"].asString(), parent);
+			node = UILayer::create(data["path"].asString(), parent);
 		}
 	} else if (type == "Sprite") {
 		node = cocos2d::Sprite::create();
@@ -231,11 +233,21 @@ cocos2d::Node* UIUtils::CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node*
 	}
 	else if (type == "Slider") {
 		auto opnode = dynamic_cast<cocos2d::ui::Slider*>(node);
-		SetNodeBySpriteFrameName(data["barBg"].asString(), CC_CALLBACK_2(opnode->loadBarTexture, opnode));
-		SetNodeBySpriteFrameName(data["barProgress"].asString(), CC_CALLBACK_2(opnode->loadProgressBarTexture, opnode));
-		SetNodeBySpriteFrameName(data["barNormalBall"].asString(), CC_CALLBACK_2(opnode->loadSlidBallTextureNormal, opnode));
-		SetNodeBySpriteFrameName(data["barSelectBall"].asString(), CC_CALLBACK_2(opnode->loadSlidBallTexturePressed, opnode));
-		SetNodeBySpriteFrameName(data["barDisableBall"].asString(), CC_CALLBACK_2(opnode->loadSlidBallTextureDisabled, opnode));
+		SetNodeBySpriteFrameName(data["barBg"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadBarTexture(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["barProgress"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadProgressBarTexture(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["barNormalBall"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadSlidBallTextureNormal(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["barSelectBall"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadSlidBallTexturePressed(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["barDisableBall"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadSlidBallTextureDisabled(fileName, resType);
+		});
 		if (data["percent"].isInt()) {
 			opnode->setPercent(data["percent"].asInt());
 		}
@@ -245,9 +257,15 @@ cocos2d::Node* UIUtils::CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node*
 
 		if (data["scale9Enable"].isBool()) { opnode->setScale9Enabled(data["scale9Enable"].asBool()); };
 
-		SetNodeBySpriteFrameName(data["bgNormal"].asString(), CC_CALLBACK_2(opnode->loadTextureNormal, opnode));
-		SetNodeBySpriteFrameName(data["bgSelect"].asString(), CC_CALLBACK_2(opnode->loadTexturePressed, opnode));
-		SetNodeBySpriteFrameName(data["bgDisable"].asString(), CC_CALLBACK_2(opnode->loadTextureDisabled, opnode));
+		SetNodeBySpriteFrameName(data["bgNormal"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadTextureNormal(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["bgSelect"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadTexturePressed(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["bgDisable"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadTextureDisabled(fileName, resType);
+		});
 
 
 		if (data["titleText"].isString()) { opnode->setTitleText(data["titleText"].asString()); };
@@ -262,18 +280,28 @@ cocos2d::Node* UIUtils::CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node*
 
 		if (data["select"].isBool()) { opnode->setSelected(data["select"].asBool()); };
 
-		SetNodeBySpriteFrameName(data["back"].asString(), CC_CALLBACK_2(opnode->loadTextureBackGround, opnode));
-		SetNodeBySpriteFrameName(data["backSelect"].asString(), CC_CALLBACK_2(opnode->loadTextureBackGroundSelected, opnode));
-		SetNodeBySpriteFrameName(data["active"].asString(), CC_CALLBACK_2(opnode->loadTextureFrontCross, opnode));
-		SetNodeBySpriteFrameName(data["backDisable"].asString(), CC_CALLBACK_2(opnode->loadTextureBackGroundDisabled, opnode));
-		SetNodeBySpriteFrameName(data["activeDisable"].asString(), CC_CALLBACK_2(opnode->loadTextureFrontCrossDisabled, opnode));
+		SetNodeBySpriteFrameName(data["back"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadTextureBackGround(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["backSelect"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadTextureBackGroundSelected(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["active"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadTextureFrontCross(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["backDisable"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadTextureBackGroundDisabled(fileName, resType);
+		});
+		SetNodeBySpriteFrameName(data["activeDisable"].asString(), [=](const std::string& fileName, cocos2d::ui::Widget::TextureResType resType) {
+			opnode->loadTextureFrontCrossDisabled(fileName, resType);
+		});
 	}
 
 	if (data["children"].isArray()) {
 		auto& children = data["children"];
 		for (auto iter = children.begin(); iter != children.end(); iter++)
 		{
-			auto child = CocosGenBaseNodeByData(*iter, node, controlNode);
+			auto child = CocosGenBaseNodeByData(*iter, node, false, controlNode);
 			if (child) {
 				node->addChild(child);
 			}
