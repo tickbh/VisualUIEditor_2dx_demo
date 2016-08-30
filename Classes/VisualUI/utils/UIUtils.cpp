@@ -1,5 +1,6 @@
 #include "UIUtils.h"
 #include "UIDataUtils.h"
+#include "../ui/UIEditBoxDelegate.h"
 
 UIUtils* UIUtils::GetInstance()
 {
@@ -124,15 +125,47 @@ cocos2d::Node* UIUtils::CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node*
 		} else {
 			edBox = cocos2d::ui::EditBox::create(cocos2d::Size(width, height), spriteBg, cocos2d::ui::Widget::TextureResType::PLIST);
 		}
+		if (controlNode) {
+			edBox->setDelegate(new UIEditBoxDelegate(controlNode->GetEventListener(data["touchListener"].asString())));
+		}
 		node = edBox;
 		edBox->setFontSize(14);
-
 	} else if (type == "Slider") {
-		node = cocos2d::ui::Slider::create();
+		auto slider = cocos2d::ui::Slider::create();
+		slider->addEventListener([=](cocos2d::Ref*, cocos2d::ui::Slider::EventType event) {
+			auto callback = controlNode->GetEventListener(data["touchListener"].asString());
+			auto uievent = UIEvent(slider, "ON_PERCENTAGE_CHANGED");
+			callback(uievent);
+		});
+		node = slider;
 	} else if (type == "CheckBox") {
-		node = cocos2d::ui::CheckBox::create();
+		auto checkbox = cocos2d::ui::CheckBox::create();
+		checkbox->addEventListener([=](cocos2d::Ref*, cocos2d::ui::CheckBox::EventType event) {
+			auto callback = controlNode->GetEventListener(data["touchListener"].asString());
+			auto uievent = UIEvent(checkbox, "selected");
+			if (event == cocos2d::ui::CheckBox::EventType::UNSELECTED) {
+				uievent.name = "unselected";
+			}
+			callback(uievent);
+		});
+		node = checkbox;
 	} else if (type == "Button") {
-		node = cocos2d::ui::Button::create();
+		auto button = cocos2d::ui::Button::create();
+		button->addTouchEventListener([=](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType event) {
+			auto callback = controlNode->GetEventListener(data["touchListener"].asString());
+			auto uievent = UIEvent(button, "began");
+			if (event == cocos2d::ui::Widget::TouchEventType::MOVED) {
+				uievent.name = "moved";
+			}
+			else if (event == cocos2d::ui::Widget::TouchEventType::ENDED) {
+				uievent.name = "ended";
+			}
+			else if (event == cocos2d::ui::Widget::TouchEventType::CANCELED) {
+				uievent.name = "canceled";
+			}
+			callback(uievent);
+		});
+		node = button;
 	} else {
 		node = cocos2d::Node::create();
 	}

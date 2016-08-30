@@ -28,7 +28,7 @@ public:
 	
 	void AddEventListener(std::string name, const eventCallback& callback);
 	void RemoveEventListener(std::string name);
-	const eventCallback& GetEventListener(std::string name);
+	const eventCallback GetEventListener(std::string name);
 	void eventListener(UIEvent& event);
 	std::string path;
 private:

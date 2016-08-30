@@ -3,8 +3,10 @@
 
 #include "UILayer.h"
 
-class UIEditBoxDelegate : cocos2d::ui::EditBoxDelegate {
+class UIEditBoxDelegate : public cocos2d::ui::EditBoxDelegate {
 
+public:
+	UIEditBoxDelegate(eventCallback callback);
 public:
 	/**
 	* This method is called when an edit box gains focus after keyboard is shown.
@@ -31,6 +33,8 @@ public:
 	* @param editBox The edit box object that generated the event.
 	*/
 	virtual void editBoxReturn(cocos2d::ui::EditBox* editBox);
+private:
+	eventCallback _callback;
 };
 
 #endif

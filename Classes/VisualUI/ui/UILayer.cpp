@@ -15,7 +15,7 @@ UILayer* UILayer::create(std::string data, cocos2d::Node* parent)
 
 void UILayer::eventListener(UIEvent& event)
 {
-
+	cocos2d::log("eventListener name is %s", event.name.c_str());
 }
 
 void UILayer::AddEventListener(std::string name, const eventCallback& callback)
@@ -31,7 +31,7 @@ void UILayer::RemoveEventListener(std::string name)
 	}
 }
 
-const eventCallback& UILayer::GetEventListener(std::string name)
+const eventCallback UILayer::GetEventListener(std::string name)
 {
 	auto iter = listeners.find(name);
 	if (iter != listeners.end()) {
