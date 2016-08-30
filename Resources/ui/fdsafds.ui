@@ -14,6 +14,16 @@
             "anchorX": 0,
             "anchorY": 0,
             "path": "ui/sub1.ui"
+        },
+        {
+            "width": "1680",
+            "height": "1104",
+            "x": 775,
+            "y": -29,
+            "type": "Sprite",
+            "scaleX": 0.6312027100822173,
+            "scaleY": 0.746606334841629,
+            "spriteFrame": "uires/loginBg.jpg"
         }
     ]
 }
