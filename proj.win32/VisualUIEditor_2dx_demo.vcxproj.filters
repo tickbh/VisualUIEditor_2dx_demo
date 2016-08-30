@@ -42,6 +42,9 @@
     <ClCompile Include="..\Classes\VisualUI\ui\UIEditBoxDelegate.cpp">
       <Filter>VisualUI\ui</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UISub1.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\VisualUI\ui\UIEditBoxDelegate.h">
       <Filter>VisualUI\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UISub1.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -146,6 +146,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\UISub1.cpp" />
     <ClCompile Include="..\Classes\VisualUI\ui\UIEditBoxDelegate.cpp" />
     <ClCompile Include="..\Classes\VisualUI\ui\UILayer.cpp" />
     <ClCompile Include="..\Classes\VisualUI\utils\UIDataUtils.cpp" />
@@ -155,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\UISub1.h" />
     <ClInclude Include="..\Classes\VisualUI\ui\UIEditBoxDelegate.h" />
     <ClInclude Include="..\Classes\VisualUI\ui\UILayer.h" />
     <ClInclude Include="..\Classes\VisualUI\utils\UIDataUtils.h" />

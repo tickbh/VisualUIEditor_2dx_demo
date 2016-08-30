@@ -1,6 +1,8 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "VisualUI/ui/UILayer.h"
+#include "UISub1.h"
+#include "VisualUI/utils/UIUtils.h"
 
 USING_NS_CC;
 
@@ -28,7 +30,9 @@ bool HelloWorld::init()
     {
         return false;
     }
-
+	UIUtils::GetInstance()->RegisterPathTemple("ui/sub1.ui", [=](std::string data, cocos2d::Node* parent) {
+		return (UILayer*)(UISub1::create(data, parent));
+	});
 	auto layer = UILayer::create("ui/test.ui", nullptr);
 	this->addChild(layer);
     //
