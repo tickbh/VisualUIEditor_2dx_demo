@@ -14,10 +14,19 @@ private:
 	std::map<std::string, std::function<UILayer*(std::string, cocos2d::Node*)>> temples;
 public:
 
+	static void AddTouchEvent(cocos2d::Node* node, UILayer* controlNode, std::string baseFunc);
 	static bool CheckPathRepeat(cocos2d::Node* node, std::string path);
-	Json::Value& GetCurJsonData(std::string path);
-	cocos2d::Color3B CovertToColor(Json::Value& value, bool* isSuccess);
+	static Json::Value& GetCurJsonData(std::string path);
+	static cocos2d::Color3B CovertToColor(Json::Value& value, bool* isSuccess);
 
-	int CalcWidth(cocos2d::Node* node, std::string& width, cocos2d::Node* parent);
+	static std::string IntToString(int value);
+	static int CalcWidth(cocos2d::Node* node, std::string& width, cocos2d::Node* parent);
+	static int CalcHeight(cocos2d::Node* node, std::string& height, cocos2d::Node* parent);
+
+	cocos2d::Node* CocosGenBaseNodeByData(Json::Value& data, cocos2d::Node* parent, UILayer* controlNode);
+
+	static cocos2d::SpriteFrame* GetSpriteFrameForName(std::string name);
+
+};
 
 #endif
