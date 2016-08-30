@@ -39,6 +39,9 @@
     <ClCompile Include="..\Classes\VisualUI\utils\UIDataUtils.cpp">
       <Filter>VisualUI\utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\VisualUI\ui\UIEditBoxDelegate.cpp">
+      <Filter>VisualUI\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -58,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\VisualUI\utils\UIDataUtils.h">
       <Filter>VisualUI\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VisualUI\ui\UIEditBoxDelegate.h">
+      <Filter>VisualUI\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
