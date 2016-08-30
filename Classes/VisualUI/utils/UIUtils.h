@@ -4,6 +4,9 @@
 #include "../ui/UILayer.h"
 #include "json/json.h"
 
+typedef std::function<void(cocos2d::ui::Widget::ccWidgetTouchCallback)> addEventFunc;
+
+
 class UIUtils {
 public:
 	UIUtils* GetInstance();
