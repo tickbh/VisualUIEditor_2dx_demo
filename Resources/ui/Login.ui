@@ -83,7 +83,7 @@
             "width": "300",
             "height": "74",
             "x": 950,
-            "y": 100,
+            "y": 101,
             "id": "loginBtn",
             "type": "Button",
             "touchEnabled": true,
@@ -97,8 +97,8 @@
         {
             "width": "300",
             "height": "74",
-            "x": 342,
-            "y": 102,
+            "x": 448,
+            "y": 101,
             "type": "Button",
             "touchEnabled": true,
             "touchListener": "DoLogin",
@@ -107,6 +107,16 @@
             "titleText": "登陆",
             "fontName": "Arial",
             "fontSize": 26
+        },
+        {
+            "width": "75",
+            "height": "23",
+            "x": 973,
+            "y": 521,
+            "type": "LabelTTF",
+            "string": "VisualUI",
+            "fontSize": 20,
+            "fontName": "Arial"
         }
     ]
 }
